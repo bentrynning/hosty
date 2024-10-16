@@ -72,11 +72,11 @@ unzip -oq "$hosty_zip" -d "$install_dir" ||
 
 
 # Secure the pod
-source /data/hosty/install/secure.sh
+source /data/hosty/scripts/secure.sh
 
 # Install docker
-source /data/hosty/install/docker.sh
+source /data/hosty/scripts/docker.sh
 
 # Start up Hosty
-source /data/hosty/install/start.sh
+source /data/hosty/scripts/start.sh
 

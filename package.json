@@ -3,7 +3,7 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "zip": "zip -r hosty.zip install source"
+    "build": "zip -r hosty.zip scripts source"
   },
   "devDependencies": {
     "@types/bun": "latest"

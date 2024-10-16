@@ -17,5 +17,11 @@ services:
       - traefik.http.routers.hosty.rule=Host(`hostii.dev`)
       - traefik.http.routers.hosty.tls.certresolver=letsencrypt
       - traefik.http.routers.hosty.tls=true
-
-   
+  backend:
+    image: "ghcr.io/bentrynning/hosty:main"
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.hosty.entrypoints=websecure
+      - traefik.http.routers.hosty.rule=Host(`backend.hostii.dev`)
+      - traefik.http.routers.hosty.tls.certresolver=letsencrypt
+      - traefik.http.routers.hosty.tls=true 
