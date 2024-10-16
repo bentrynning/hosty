@@ -2,6 +2,9 @@
   "name": "hosty",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "zip": "zip -r hosty.zip install source"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },

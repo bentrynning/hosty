@@ -1,0 +1,22 @@
+services:
+  traefik:
+    image: traefik:v3.1
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./config/traefik.yml:/etc/traefik/traefik.yml:ro"
+      - "./letsencrypt:/letsencrypt"
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.hosty.entrypoints=websecure
+      - traefik.http.routers.hosty.rule=Host("hostii.dev")
+      - traefik.http.routers.hosty.tls=true
+      - traefik.http.routers.hosty.tls.certresolver=letsencrypt
+
+   
