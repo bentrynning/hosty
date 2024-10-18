@@ -13,15 +13,15 @@ services:
     image: "ghcr.io/bentrynning/hosty:main"
     labels:
       - traefik.enable=true
-      - traefik.http.routers.hosty.entrypoints=websecure
-      - traefik.http.routers.hosty.rule=Host(`hostii.dev`)
-      - traefik.http.routers.hosty.tls.certresolver=letsencrypt
-      - traefik.http.routers.hosty.tls=true
+      - traefik.http.routers.app.entrypoints=websecure
+      - traefik.http.routers.app.rule=Host(`hostii.dev`)
+      - traefik.http.routers.app.tls.certresolver=letsencrypt
+      - traefik.http.routers.app.tls=true
   backend:
     image: "ghcr.io/bentrynning/hosty:main"
     labels:
       - traefik.enable=true
-      - traefik.http.routers.hosty.entrypoints=websecure
-      - traefik.http.routers.hosty.rule=Host(`backend.hostii.dev`)
-      - traefik.http.routers.hosty.tls.certresolver=letsencrypt
-      - traefik.http.routers.hosty.tls=true 
+      - traefik.http.routers.backend.entrypoints=websecure
+      - traefik.http.routers.backend.rule=Host(`backend.hostii.dev`)
+      - traefik.http.routers.backend.tls.certresolver=letsencrypt
+      - traefik.http.routers.backend.tls=true 

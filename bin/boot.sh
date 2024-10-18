@@ -3,3 +3,6 @@ curl -fsSL https://raw.githubusercontent.com/bentrynning/secure-droplet/refs/hea
 
 # Connect to the droplet from local machine 
 ssh -L 8080:localhost:8080 root@ip_address
+
+# Kill the process
+kill $(lsof -t -i:8080)

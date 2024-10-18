@@ -18,6 +18,9 @@ get_file "$hosty_zip" ||
 unzip -oq "$hosty_zip" -d "$install_dir" ||
     error "Error: Failed to extract hosty"
 
+# Delete the ZIP file
+rm -f "$hosty_zip"
 
+cd /
 # Start up Hosty
-source /data/hosty/scripts/start.sh
+source ./data/hosty/scripts/start.sh
