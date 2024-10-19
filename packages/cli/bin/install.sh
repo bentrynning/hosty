@@ -71,11 +71,11 @@ unzip -oq "$hosty_zip" -d "$install_dir" ||
     error "Error: Failed to extract hosty"
 
 # Secure the pod
-source ./data/hosty/source/secure.sh
+source ./data/hosty/scripts/secure.sh
 
 # Install docker
-source ./data/hosty/source/docker.sh
+source ./data/hosty/scripts/docker.sh
 
 # Start up Hosty
-source ./data/hosty/source/start.sh
+source ./data/hosty/scripts/start.sh
 

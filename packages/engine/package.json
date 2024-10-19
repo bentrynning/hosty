@@ -1,0 +1,8 @@
+{
+  "name": "@hosty/engine",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "zip -r hosty.zip scripts source"
+  } 
+}

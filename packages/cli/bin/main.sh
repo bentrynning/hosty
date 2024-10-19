@@ -1,10 +1,18 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Variables
 REMOTE_USER="root"
-REMOTE_HOST="165.232.77.93"
 REMOTE_PORT=22
-LOCAL_SCRIPT_PATH="./deploy.sh"
+LOCAL_SCRIPT_PATH=""
+
+
+if [[ $1 == "deploy" ]]; then
+    LOCAL_SCRIPT_PATH="./deploy.sh"
+fi
+if [[ $1 == "install" ]]; then
+    LOCAL_SCRIPT_PATH="./install.sh"
+fi
+
 
 # Execute the script on the remote server using SSH 
 # ssh -p $REMOTE_PORT $REMOTE_USER@$REMOTE_HOST "bash -s" < $REMOTE_SCRIPT_PATH

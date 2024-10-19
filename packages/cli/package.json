@@ -1,0 +1,14 @@
+{
+  "name": "@hosty/cli",
+  "module": "index.ts",
+  "type": "module",
+  "bin": {
+    "hosty": "./bin/main.sh"
+  },
+  "files": [
+    "bin"
+  ],
+  "scripts": {
+    "echo": "echo 'Hello, hosty!'"
+  }
+}

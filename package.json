@@ -1,14 +1,16 @@
 {
   "name": "hosty",
-  "module": "index.ts",
+  "private": true,
   "type": "module",
   "scripts": {
-    "build": "zip -r hosty.zip scripts source"
+    "echo": "echo 'Hello, hosty!'",
+    "build": "bun build"
   },
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "peerDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.6.3"
   }
 }
