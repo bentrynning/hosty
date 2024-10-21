@@ -7,5 +7,5 @@ source /data/hosty/scripts/secure.sh
 source /data/hosty/scripts/docker.sh
 
 # Start up Hosty
-source /data/hosty/scripts/start.sh
+echo "Everything is setup, you can now start Hosty by running 'hosty start'"
 

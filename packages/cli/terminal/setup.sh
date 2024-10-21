@@ -43,13 +43,17 @@ success() {
     echo -e "${Green}$@ ${Color_Off}"
 }
 
+# Setups
 get_file() {
     curl -H "Authorization: token $TOKEN" \
         -H "Accept: application/vnd.github.v3.raw" \
         -LO https://api.github.com/repos/bentrynning/hosty/contents/$1
 }
 
+sudo apt-get install unzip
+
 # Variables
+repo_zip_url="packages/engine/hosty.zip"
 hosty_zip="hosty.zip"
 install_dir="/data/hosty"
 
@@ -60,16 +64,12 @@ if [[ ! -d $install_dir ]]; then
 fi
 
 # Download the ZIP file
-get_file "$hosty_zip" ||
+get_file "$repo_zip_url" ||
     error "Error: Failed to download hosty from GitHub"
 
 # Unzip the file into hosty dir
 unzip -oq "$hosty_zip" -d "$install_dir" ||
     error "Error: Failed to extract hosty"
 
-# Delete the ZIP file
-rm -f "$hosty_zip"
 
-cd /
-# Start up Hosty
-source ./data/hosty/scripts/start.sh
+source /data/hosty/scripts/setup.sh

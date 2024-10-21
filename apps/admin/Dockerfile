@@ -11,13 +11,13 @@ RUN mkdir -p /temp/dev
 
 COPY bun.lockb /temp/dev/
 COPY apps/admin/package.json /temp/dev/
-RUN cd /temp/dev && bun install
+RUN cd /temp/dev && bun install --frozen-lockfile
 
 # install with --production (exclude devDependencies)
 RUN mkdir -p /temp/prod
 COPY bun.lockb /temp/prod/
 COPY apps/admin/package.json /temp/prod/
-RUN cd /temp/prod && bun install
+RUN cd /temp/prod && bun install --frozen-lockfile
 
 # copy node_modules from temp directory
 # then copy all (non-ignored) project files into the image
