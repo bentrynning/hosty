@@ -1,0 +1,33 @@
+# This workflow creates a tar.gz archive of the engine package and uploads it as a release asset on every push to main.
+name: Release Engine Package
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build-engine-archive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create engine-latest.tar.gz
+        run: |
+          cd packages
+          tar -czf engine-latest.tar.gz engine
+          mv engine-latest.tar.gz $GITHUB_WORKSPACE
+
+      - name: Upload engine-latest.tar.gz as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: engine-latest
+          path: engine-latest.tar.gz
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: engine-latest.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
