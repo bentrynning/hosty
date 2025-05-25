@@ -36,7 +36,7 @@ export async function Home() {
           </div>
         </div>
         <a
-          href="/install"
+          href="/install.sh"
           className="mt-2 text-[#60aaff] hover:underline text-sm text-center font-medium"
         >
           View install script
