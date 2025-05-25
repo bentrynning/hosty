@@ -1,5 +1,5 @@
 {
-  "name": "@hosty/admin",
+  "name": "@hosty/docs",
   "module": "index.tsx",
   "type": "module",
   "scripts": {

@@ -8,4 +8,3 @@ source /data/hosty/scripts/docker.sh
 
 # Start up Hosty
 echo "Everything is setup, you can now start Hosty by running 'hosty start'"
-

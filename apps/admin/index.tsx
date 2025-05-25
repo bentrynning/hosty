@@ -8,10 +8,6 @@ app.get("/health", (c) => c.text("Hello, Hono!"));
 
 app.use("/static/*", serveStatic({ root: "./" }));
 
-app.get("/", async (c) =>
-  c.html(<Home />)
-);
-
 app.get("/install", serveStatic({ path: "./static/install.sh" }));
 
 // Start the Hono app as usual
@@ -19,5 +15,7 @@ Bun.serve({
   port: 3000,
   fetch: app.fetch,
 });
+
+export default app;
 
 console.log("Server is running on http://localhost:3000");
