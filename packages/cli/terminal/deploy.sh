@@ -60,6 +60,12 @@ if [[ ! -d $install_dir ]]; then
         error "Error: Failed to create install directory \"$install_dir\""
 fi
 
+# --- Hosty VPS Setup ---
+# 1. Secure and prepare the VPS (firewall, SSH, Docker, etc.)
+source /data/hosty/scripts/secure.sh
+source /data/hosty/scripts/docker.sh
+
+# 2. Download and extract the latest Hosty engine
 # Download the ZIP file
 get_file "$repo_zip_url" ||
     error "Error: Failed to download hosty from GitHub"
@@ -71,5 +77,12 @@ unzip -oq "$hosty_zip" -d "$install_dir" ||
 # Delete the ZIP file
 rm -f "$hosty_zip"
 
-# Start up Hosty
-source ./data/hosty/scripts/start.sh
+# 3. Start up Hosty
+cd /data/hosty/source
+if [[ -n "$TOKEN" ]]; then
+    echo "$TOKEN" | docker login ghcr.io -u bentrynning --password-stdin
+fi
+docker compose up -d
+rm -f ~/.docker/config.json
+
+success "Hosty is now running!"

@@ -1,17 +1,20 @@
 {
   "name": "@hosty/admin",
-  "module": "index.ts",
+  "module": "index.tsx",
   "type": "module",
-  "bin": {
-    "hosty": "./bin/main.sh"
-  },
   "scripts": {
-    "start": "bun run ./indext.ts"
+    "dev": "bun run --hot ./index.tsx & bun tailwind",
+    "tailwind": "bunx @tailwindcss/cli -i ./styles.css -o ./static/styles.css --watch",
+    "start": "bun tailwind && bun run ./index.tsx"
   },
   "devDependencies": {
-    "@types/bun": "1.1.11"
+    "@types/bun": "1.1.11",
+    "typescript": "5.6.3",
+    "tailwindcss": "^4.1.7",
+    "@tailwindcss/cli": "^4.1.7"
   },
-  "peerDependencies": {
-    "typescript": "5.6.3"
+  "dependencies": {
+    "hono": "^4.7.10",
+    "lucide-static": "^0.511.0"
   }
 }
