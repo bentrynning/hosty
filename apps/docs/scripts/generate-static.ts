@@ -1,4 +1,4 @@
-import app from "../index.tsx";
+import app from "../static.tsx";
 import { writeFileSync, mkdirSync,  } from "fs";
 
 // Define your routes and output paths

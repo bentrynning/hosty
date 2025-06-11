@@ -2,7 +2,11 @@
   "name": "@hosty/engine",
   "module": "index.ts",
   "type": "module",
+  "version": "0.0.1",
   "scripts": {
-    "build": "zip -r hosty.zip scripts source"
+    "publish": "git tag v$npm_package_version && git push origin v$npm_package_version",
+    "bump:patch": "npm version patch",
+    "bump:minor": "npm version minor",
+    "bump:major": "npm version major"
   } 
 }
