@@ -8,16 +8,18 @@ WORKDIR /usr/src/app
 # this will cache them and speed up future builds
 FROM base AS install
 RUN mkdir -p /temp/dev
+RUN mkdir -p /temp/prod
 
-COPY bun.lockb /temp/dev/
+COPY bunfig.toml /temp/dev/
+COPY bun.lock /temp/dev/
 COPY apps/admin/package.json /temp/dev/
-RUN cd /temp/dev && bun install --frozen-lockfile --filter './admin'
+RUN cd /temp/dev && bun install
 
 # install with --production (exclude devDependencies)
-RUN mkdir -p /temp/prod
-COPY bun.lockb /temp/prod/
+COPY apps/admin/bunfig.toml /temp/prod/
+COPY bun.lock /temp/prod/
 COPY apps/admin/package.json /temp/prod/
-RUN cd /temp/prod && bun install --production --frozen-lockfile --filter './admin'
+RUN cd /temp/prod && bun install --production
 
 # copy node_modules from temp directory
 # then copy all (non-ignored) project files into the image
@@ -33,7 +35,7 @@ ENV NODE_ENV=production
 # copy production dependencies and source code into final image
 FROM base AS release
 COPY --from=install /temp/prod/node_modules node_modules
-COPY --from=prerelease /usr/src/app/index.ts .
+COPY --from=prerelease /usr/src/app/index.tsx .
 COPY --from=prerelease /usr/src/app/package.json .
 
 # run the app

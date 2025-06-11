@@ -1,0 +1,6 @@
+[install]
+# Allow lockfile changes during Docker builds
+frozenLockfile = false
+
+# Cache configuration
+cache = true

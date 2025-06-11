@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 # Secure the pod
-source /data/hosty/scripts/secure.sh
+source ./secure.sh
 
 # Install docker
-source /data/hosty/scripts/docker.sh
+source ./docker.sh
 
 # Start up Hosty
 echo "Everything is setup, you can now start Hosty by running 'hosty start'"

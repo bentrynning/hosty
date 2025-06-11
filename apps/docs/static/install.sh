@@ -17,10 +17,10 @@ fi
 
 # Extract the engine package
 if [ ! -d "$ENGINE_DIR" ]; then
-  echo "Extracting engine package..."
+  echo "Extracting Hosty engine package..."
   tar -xzf "$ARCHIVE_NAME"
 else
-  echo "Engine directory already exists."
+  echo "Hosty engine directory already exists."
 fi
 
 cd "$ENGINE_DIR/scripts" || { echo "Failed to enter scripts directory."; exit 1; }

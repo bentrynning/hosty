@@ -2,11 +2,11 @@
   "name": "@hosty/engine",
   "module": "index.ts",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "scripts": {
     "publish": "git tag v$npm_package_version && git push origin v$npm_package_version",
     "bump:patch": "npm version patch",
     "bump:minor": "npm version minor",
     "bump:major": "npm version major"
-  } 
+  }
 }

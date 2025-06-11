@@ -46,7 +46,8 @@ success() {
 # Start up Hosty
 echo "$TOKEN" | docker login ghcr.io -u bentrynning --password-stdin
 
-cd /data/hosty/source
+cd /engine
+
 docker compose up -d
 
 rm -f ~/.docker/config.json

@@ -4,7 +4,7 @@ name: Release Engine Package
 on:
   push:
     branches:
-      - '*'
+      - main
   workflow_dispatch:
 
 permissions:
@@ -16,6 +16,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Get engine version
+        id: get_version
+        run: |
+          cd packages/engine
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=v$VERSION" >> $GITHUB_OUTPUT
+          echo "Engine version: v$VERSION"
 
       - name: Create engine-latest.tar.gz
         run: |
@@ -33,9 +41,10 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: engine-latest.tar.gz
-          tag_name: ${{ github.ref_name }}-${{ github.sha }}
-          name: Engine Release ${{ github.ref_name }}-${{ github.sha }}
+          tag_name: ${{ steps.get_version.outputs.version }}
+          name: Engine Release ${{ steps.get_version.outputs.version }}
+          generate_release_notes: true
           draft: false
-          prerelease: true
+          prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
