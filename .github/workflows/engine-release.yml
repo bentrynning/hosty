@@ -1,11 +1,14 @@
-# This workflow creates a tar.gz archive of the engine package and uploads it as a release asset on every push to main.
+# This workflow creates a tar.gz archive of the engine package and uploads it as a release asset.
 name: Release Engine Package
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - '*'
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build-engine-archive:
@@ -30,5 +33,9 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: engine-latest.tar.gz
+          tag_name: ${{ github.ref_name }}-${{ github.sha }}
+          name: Engine Release ${{ github.ref_name }}-${{ github.sha }}
+          draft: false
+          prerelease: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

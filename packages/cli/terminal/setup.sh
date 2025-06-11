@@ -46,7 +46,7 @@ success() {
 # Setups
 get_tar_package() {
     curl -L "https://api.github.com/repos/bentrynning/hosty/tarball/main" -o "$1" ||
-    error "Error: Failed to download tar package from GitHub"
+        error "Error: Failed to download tar package from GitHub"
 }
 
 sudo apt-get install tar
