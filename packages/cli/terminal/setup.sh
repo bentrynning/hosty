@@ -44,17 +44,15 @@ success() {
 }
 
 # Setups
-get_file() {
-    curl -H "Authorization: token $TOKEN" \
-        -H "Accept: application/vnd.github.v3.raw" \
-        -LO https://api.github.com/repos/bentrynning/hosty/contents/$1
+get_tar_package() {
+    curl -L "https://api.github.com/repos/bentrynning/hosty/tarball/main" -o "$1" ||
+    error "Error: Failed to download tar package from GitHub"
 }
 
-sudo apt-get install unzip
+sudo apt-get install tar
 
 # Variables
-repo_zip_url="packages/engine/hosty.zip"
-hosty_zip="hosty.zip"
+hosty_tar="hosty.tar.gz"
 install_dir="/data/hosty"
 
 # Create the install directory if it doesn't exist
@@ -63,13 +61,17 @@ if [[ ! -d $install_dir ]]; then
         error "Error: Failed to create install directory \"$install_dir\""
 fi
 
-# Download the ZIP file
-get_file "$repo_zip_url" ||
+# Download the tar package
+info "Downloading hosty engine from GitHub..."
+get_tar_package "$hosty_tar" ||
     error "Error: Failed to download hosty from GitHub"
 
-# Unzip the file into hosty dir
-unzip -oq "$hosty_zip" -d "$install_dir" ||
+# Extract the tar package into hosty dir
+info "Extracting hosty engine..."
+tar -xzf "$hosty_tar" -C "$install_dir" --strip-components=1 ||
     error "Error: Failed to extract hosty"
 
+# Clean up the downloaded tar file
+rm -f "$hosty_tar"
 
 source /data/hosty/scripts/setup.sh
