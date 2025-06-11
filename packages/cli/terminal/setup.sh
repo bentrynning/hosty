@@ -44,9 +44,14 @@ success() {
 }
 
 # Setups
-get_tar_package() {
-    curl -L "https://api.github.com/repos/bentrynning/hosty/tarball/main" -o "$1" ||
-        error "Error: Failed to download tar package from GitHub"
+get_package() {
+    # Get the latest release tag from GitHub API
+    local latest_tag=$(curl -s "https://api.github.com/repos/bentrynning/hosty/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+    local release_url="https://github.com/bentrynning/hosty/releases/download/${latest_tag}/engine-latest.tar.gz"
+    
+    info "Downloading engine package from release: $latest_tag"
+    curl -L "$release_url" -o "$1" ||
+        error "Error: Failed to download engine package from GitHub releases"
 }
 
 sudo apt-get install tar
@@ -63,7 +68,7 @@ fi
 
 # Download the tar package
 info "Downloading hosty engine from GitHub..."
-get_tar_package "$hosty_tar" ||
+get_package "$hosty_tar" ||
     error "Error: Failed to download hosty from GitHub"
 
 # Extract the tar package into hosty dir
