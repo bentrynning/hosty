@@ -1,12 +1,15 @@
 {
   "name": "@hosty/cli",
+  "version": "1.0.0",
+  "description": "CLI for managing Hosty deployments on remote servers",
   "module": "index.ts",
   "type": "module",
   "bin": {
     "hosty": "./bin/main.sh"
   },
   "files": [
-    "bin"
+    "bin",
+    "terminal"
   ],
   "scripts": {
     "echo": "echo 'Hello, hosty!'"

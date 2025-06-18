@@ -42,4 +42,3 @@ info_bold() {
 success() {
     echo -e "${Green}$@ ${Color_Off}"
 }
-

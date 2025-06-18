@@ -44,10 +44,30 @@ success() {
 }
 
 # Start up Hosty
-echo "$TOKEN" | docker login ghcr.io -u bentrynning --password-stdin
+info "Starting Hosty on remote server..."
 
-cd /engine
+# Check if GITHUB_TOKEN is set
+if [[ -z "$GITHUB_TOKEN" ]]; then
+    error "GITHUB_TOKEN environment variable is not set"
+fi
 
-docker compose up -d
+info "Logging into Docker registry..."
+echo "$GITHUB_TOKEN" | docker login ghcr.io -u bentrynning --password-stdin
 
+# Check if engine directory exists, if not use data directory
+
+ENGINE_DIR="./engine"
+if [[ ! -d "$ENGINE_DIR" ]]; then
+    error "Engine directory not found. Please run 'hosty setup' first."
+fi
+
+info "Changing to engine directory: $ENGINE_DIR"
+cd "$ENGINE_DIR" || error "Failed to change to engine directory"
+
+info "Starting Docker containers..."
+docker compose up -d || error "Failed to start Docker containers"
+
+info "Cleaning up Docker configuration..."
 rm -f ~/.docker/config.json
+
+success "Hosty started successfully! 🚀"

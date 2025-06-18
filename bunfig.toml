@@ -1,6 +1,0 @@
-[install]
-# Allow lockfile changes during install
-frozenLockfile = false
-
-# Cache configuration for faster installs
-cache = true

@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "bun build"
+    "echo": "bun run build"
   },
   "workspaces": [
     "packages/*",
