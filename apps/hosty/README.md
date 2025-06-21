@@ -1,22 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hosty - Web Application Platform
 
-## Getting Started
+Hosty is a platform for deploying and managing web applications with a secure admin interface.
 
-First, run the development server:
+## Features
+
+- **SQLite Database**: Using Drizzle ORM with @libsql/client
+- **Admin Authentication**: Secure login system for admin users
+- **Modern UI**: Built with Next.js 15 and Tailwind CSS
+- **Database Management**: Drizzle Studio for database visualization
+- **Bun Runtime**: Fast JavaScript runtime and package manager
+
+## Setup
+
+### Prerequisites
+
+- [Bun](https://bun.sh/) installed on your system
+
+### Installation
+
+1. Install dependencies:
+   ```bash
+   bun install
+   ```
+
+2. Generate and push database schema:
+   ```bash
+   bun run db:generate
+   bun run db:push
+   ```
+
+3. Initialize database with default admin user:
+   ```bash
+   bun run db:init
+   ```
+
+4. Start the development server:
+   ```bash
+   bun run dev
+   ```
+
+### Default Admin Credentials
+
+After running `bun run db:init`, you can login with:
+
+- **Email**: admin@hosty.dev
+- **Username**: admin
+- **Password**: admin123
+
+⚠️ **Important**: Change the default password after first login!
+
+## Database Management
+
+### Available Scripts
+
+- `bun run db:generate` - Generate migration files from schema
+- `bun run db:push` - Push schema changes to database
+- `bun run db:studio` - Open Drizzle Studio for database management
+- `bun run db:init` - Initialize database with default admin user
+
+### Drizzle Studio
+
+Launch Drizzle Studio to manage your database:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bun run db:studio
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This will open a web interface where you can:
+- View and edit database records
+- Explore table relationships
+- Run custom queries
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
